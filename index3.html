@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SneakerStore - Loja de Tênis</title>
+  <!-- Bootstrap CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Ícones do Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    .card-img-top {
+      height: 220px;
+      object-fit: cover;
+    }
+    .hero-banner {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 100px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menu / Header -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">SNEAKER<span class="text-primary">STORE</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#produtos">Produtos</a></li>
+        </ul>
+        <button class="btn btn-outline-light position-relative" data-bs-toggle="modal" data-bs-target="#carrinhoModal">
+          <i class="bi bi-cart3"></i> Carrinho
+          <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Banner Principal -->
+  <header id="home" class="hero-banner text-center">
+    <div class="container">
+      <h1 class="display-4 fw-bold">O Estilo que seus pés merecem</h1>
+      <p class="lead">Confira os lançamentos mais exclusivos com descontos especiais.</p>
+      <a href="#produtos" class="btn btn-primary btn-lg mt-3">Ver Ofertas</a>
+    </div>
+  </header>
+
+  <!-- Seção de Produtos -->
+  <section id="produtos" class="container my-5">
+    <h2 class="text-center mb-4 fw-bold">Nossos Lançamentos</h2>
+    <div class="row g-4">
+      
+      <!-- Card Produto 1 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Tênis Nike Red">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Nike Air Sport</h5>
+            <p class="card-text text-muted">Design aerodinâmico e amortecimento macio para corridas.</p>
+            <p class="fs-4 fw-bold text-primary mt-auto">R$ 299,90</p>
+            <button class="btn btn-primary w-100" onclick="adicionarAoCarrinho('Nike Air Sport', 299.90)">
+              <i class="bi bi-bag-plus"></i> Adicionar ao Carrinho
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Produto 2 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Tênis Puma White">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Puma Casual Classic</h5>
+            <p class="card-text text-muted">Ideal para o dia a dia, combinando leveza e elegância.</p>
+            <p class="fs-4 fw-bold text-primary mt-auto">R$ 199,90</p>
+            <button class="btn btn-primary w-100" onclick="adicionarAoCarrinho('Puma Casual Classic', 199.90)">
+              <i class="bi bi-bag-plus"></i> Adicionar ao Carrinho
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Produto 3 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Tênis Urbano Multicolor">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Sneaker Street Wear</h5>
+            <p class="card-text text-muted">Cores vibrantes para se destacar no estilo urbano.</p>
+            <p class="fs-4 fw-bold text-primary mt-auto">R$ 349,90</p>
+            <button class="btn btn-primary w-100" onclick="adicionarAoCarrinho('Sneaker Street Wear', 349.90)">
+              <i class="bi bi-bag-plus"></i> Adicionar ao Carrinho
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Modal do Carrinho -->
+  <div class="modal fade" id="carrinhoModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Seu Carrinho</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <ul id="cart-items" class="list-group mb-3">
+            <!-- Itens serão renderizados pelo JS -->
+          </ul>
+          <div class="d-flex justify-content-between align-items-center fw-bold fs-5">
+            <span>Total:</span>
+            <span id="cart-total" class="text-success">R$ 0,00</span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continuar Comprando</button>
+          <button type="button" class="btn btn-success" onclick="finalizarCompra()">Finalizar Compra</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rodapé -->
+  <footer class="bg-dark text-white text-center py-4 mt-5">
+    <p class="mb-0">&copy; 2026 SneakerStore. Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- Bootstrap JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/bootstrap.bundle.min.js"></script>
+
+  <!-- Lógica do Carrinho com JS -->
+  <script>
+    let carrinho = [];
+
+    function adicionarAoCarrinho(nome, preco) {
+      carrinho.push({ nome, preco });
+      atualizarCarrinho();
+    }
+
+    function atualizarCarrinho() {
+      const cartCount = document.getElementById('cart-count');
+      const cartItems = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
+
+      cartCount.innerText = carrinho.length;
+      cartItems.innerHTML = '';
+
+      let total = 0;
+
+      if (carrinho.length === 0) {
+        cartItems.innerHTML = '<li class="list-group-item text-center text-muted">Seu carrinho está vazio.</li>';
+      } else {
+        carrinho.forEach((item, index) => {
+          total += item.preco;
+          cartItems.innerHTML += `
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              ${item.nome} - R$ ${item.preco.toFixed(2).replace('.', ',')}
+              <button class="btn btn-sm btn-danger" onclick="removerDoCarrinho(${index})"><i class="bi bi-trash"></i></button>
+            </li>
+          `;
+        });
+      }
+
+      cartTotal.innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+
+    function removerDoCarrinho(index) {
+      carrinho.splice(index, 1);
+      atualizarCarrinho();
+    }
+
+    function finalizarCompra() {
+      if (carrinho.length === 0) {
+        alert("Seu carrinho está vazio!");
+        return;
+      }
+      alert("Compra realizada com sucesso! Obrigado pela preferência.");
+      carrinho = [];
+      atualizarCarrinho();
+      const modal = bootstrap.Modal.getInstance(document.getElementById('carrinhoModal'));
+      modal.hide();
+    }
+  </script>
+</body>
+</html>
